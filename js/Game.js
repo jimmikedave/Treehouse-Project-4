@@ -46,7 +46,7 @@
      }
    }
 
-   //displays winning screen if finalGuess = activePhrase
+   //checks if all letters f phrase has been guessed
    checkForWin() {
      const guess = document.getElementsByClassName('show');
      const space = document.getElementsByClassName('space');
@@ -54,24 +54,9 @@
      const spaceLength = space.length;
      const finalGuess = guessLength + spaceLength;
      const phraseLength = this.activePhrase.phrase.length;
-     const startScreen = document.getElementById('overlay');
-     const gameOverMsg = document.getElementById('game-over-message');
-     const banner = document.getElementById('banner');
-     const youWin = document.createElement('h2');
-     const header = banner.firstElementChild;
-
-     startScreen.className = 'win';
-     gameOverMsg.textContent = 'You win!'
 
      if(finalGuess === phraseLength){
-       youWin.textContent = 'You win!';
-       header.appendChild(youWin);
-      const winScreen = () =>{
-        startScreen.style.display = '';
-        this.reset();
-      }
-      setTimeout(winScreen, 2000);
-
+       this.gameOver(true);
      }
    };
 
@@ -90,20 +75,40 @@
        scoreboard[3].src = 'images/lostheart.png';
      } else if (this.missed === 5) {
        scoreboard[4].src = 'images/lostheart.png';
-       this.gameOver();
+       this.gameOver(false);
      }
    };
 
-   //ends game and displays losing screen
-   gameOver(){
-     const startScreen = document.getElementById('overlay');
-     const gameOverMsg = document.getElementById('game-over-message');
+   //ends game and displays a losing or winning screen
+   gameOver(boo){
+     if (boo) {
+       const startScreen = document.getElementById('overlay');
+       const gameOverMsg = document.getElementById('game-over-message');
+       const banner = document.getElementById('banner');
+       const youWin = document.createElement('h2');
+       const header = banner.firstElementChild;
 
-     startScreen.className = 'lose';
-     startScreen.style.display = '';
-     gameOverMsg.textContent = 'Try again?';
+       startScreen.className = 'win';
+       youWin.id = 'congrats';
+       gameOverMsg.textContent = 'You win!'
+       youWin.textContent = 'You win!';
+       header.appendChild(youWin);
 
-     this.reset();
+      const winScreen = () =>{
+        startScreen.style.display = '';
+        this.reset();
+      }
+      setTimeout(winScreen, 2000);
+     } else {
+       const startScreen = document.getElementById('overlay');
+       const gameOverMsg = document.getElementById('game-over-message');
+
+       startScreen.className = 'lose';
+       startScreen.style.display = '';
+       gameOverMsg.textContent = 'Try again?';
+
+       this.reset();
+    }
    };
 
    //resets all elements to their original state
@@ -111,8 +116,10 @@
      const phraseUl = document.getElementById('phrase').firstElementChild;
      const keyboard = document.querySelectorAll('button');
      const scoreboard = document.querySelectorAll('img');
+     const youWin = document.getElementById('congrats');
 
      phraseUl.innerHTML = '';
+     youWin.innerHTML = '';
 
      for(i = 0; i < keyboard.length; i += 1) {
        if (keyboard[i].disabled === true){

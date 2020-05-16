@@ -17,3 +17,4 @@ Style Changes
 - added a coral groove border to the game
 - lives grow 1.1 larger when hovered over
 - keys have coral box shadow when hovered over
+- added 'You Win!' under the header when the phrase is completed

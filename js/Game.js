@@ -17,7 +17,7 @@
 
    //returns a phrase at random
    getRandomPhrase() {
-     const rndm = Math.floor((Math.random() * 4));
+     const rndm = Math.floor((Math.random() * 5));
      return this.phrases[rndm];
    };
 
@@ -56,13 +56,22 @@
      const phraseLength = this.activePhrase.phrase.length;
      const startScreen = document.getElementById('overlay');
      const gameOverMsg = document.getElementById('game-over-message');
+     const banner = document.getElementById('banner');
+     const youWin = document.createElement('h2');
+     const header = banner.firstElementChild;
 
      startScreen.className = 'win';
      gameOverMsg.textContent = 'You win!'
 
      if(finalGuess === phraseLength){
-       startScreen.style.display = '';
-       this.reset();
+       youWin.textContent = 'You win!';
+       header.appendChild(youWin);
+      const winScreen = () =>{
+        startScreen.style.display = '';
+        this.reset();
+      }
+      setTimeout(winScreen, 2000);
+
      }
    };
 

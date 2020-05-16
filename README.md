@@ -14,4 +14,6 @@ show the letter if a letter is matched.
 
 Style Changes
 - changed the game's background color to skyblue
-- added a coral groove border to the game 
+- added a coral groove border to the game
+- lives grow 1.1 larger when hovered over
+- keys have coral box shadow when hovered over

@@ -3,7 +3,7 @@
  * Game.js */
 
  class Game {
-   constructor(){
+   constructor() {
      this.missed = 0;
      this.phrases = [
        {phrase: 'someone please revive me'},
@@ -15,42 +15,61 @@
      this.activePhrase = null;
    }
 
-   getRandomPhrase(){
-     //grab a random phrase from this.phrases
+   //returns a phrase at random
+   getRandomPhrase() {
      const rndm = Math.floor((Math.random() * 4));
      return this.phrases[rndm];
    };
 
-   startGame(){
+   //removes overlay to display the game page
+   startGame() {
      const startScreen = document.getElementById('overlay');
      const randomPhrase = this.getRandomPhrase().phrase;
 
-     //hides the start screen overlay div w/ id=overlay
      startScreen.style.display = 'none';
 
-     //add random Phrase to activePhrase
      this.activePhrase = new Phrase (randomPhrase);
-
-     //displays random phrase placeholders
      this.activePhrase.addPhraseToDisplay();
+
    };
 
-   handleInteraction(clicked){
+   //handles onscreen clicks
+   handleInteraction(clicked) {
      clicked.disabled = true;
-     if (this.activePhrase.checkLetter(clicked.textContent) === true){
+     if (this.activePhrase.checkLetter(clicked.textContent)){
        clicked.className = 'chosen';
        this.activePhrase.showMatchedLetter(clicked);
+       this.checkForWin();
      } else {
        clicked.className = 'wrong';
        this.removeLife();
      }
    }
-   checkForWin(){
 
+   //displays winning screen if finalGuess = activePhrase
+   checkForWin() {
+     const guess = document.getElementsByClassName('show');
+     const space = document.getElementsByClassName('space');
+     const guessLength = guess.length;
+     const spaceLength = space.length;
+     const finalGuess = guessLength + spaceLength;
+     const phraseLength = this.activePhrase.phrase.length;
+     const startScreen = document.getElementById('overlay');
+     const gameOverMsg = document.getElementById('game-over-message');
+
+     startScreen.className = 'win';
+     gameOverMsg.textContent = 'You win!'
+
+     if(finalGuess === phraseLength){
+       startScreen.style.display = '';
+       this.reset();
+     }
    };
 
-   removeLife(clicked){
+   //removes a life if the wrong key is clicked
+   removeLife(clicked) {
      const scoreboard = document.querySelectorAll('img');
+
      this.missed += 1;
      if (this.missed === 1) {
        scoreboard[0].src = 'images/lostheart.png';
@@ -65,6 +84,8 @@
        this.gameOver();
      }
    };
+
+   //ends game and displays losing screen
    gameOver(){
      const startScreen = document.getElementById('overlay');
      const gameOverMsg = document.getElementById('game-over-message');
@@ -73,6 +94,26 @@
      startScreen.style.display = '';
      gameOverMsg.textContent = 'Try again?';
 
-     list.innerHTML = '';
+     this.reset();
+   };
+
+   //resets all elements to their original state
+   reset(){
+     const phraseUl = document.getElementById('phrase').firstElementChild;
+     const keyboard = document.querySelectorAll('button');
+     const scoreboard = document.querySelectorAll('img');
+
+     phraseUl.innerHTML = '';
+
+     for(i = 0; i < keyboard.length; i += 1) {
+       if (keyboard[i].disabled === true){
+       keyboard[i].className = 'key';
+       keyboard[i].disabled = false;
+      }
+     }
+
+     scoreboard.forEach(score => score.src = 'images/liveHeart.png');
+     this.missed = 0;
+
    };
  };

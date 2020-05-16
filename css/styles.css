@@ -66,6 +66,8 @@ button {
 }
 
 .main-container {
+  background-color: skyblue;
+  border: 10px groove coral;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -159,6 +161,12 @@ button {
   border-right: solid 3px rgba(0, 0, 0, 0);
 }
 
+/* Lives */
+
+.tries:hover{
+
+
+}
 
 /* Overlay */
 

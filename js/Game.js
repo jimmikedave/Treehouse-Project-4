@@ -106,7 +106,6 @@
        startScreen.className = 'lose';
        startScreen.style.display = '';
        gameOverMsg.textContent = 'Try again?';
-
        this.reset();
     }
    };
@@ -119,7 +118,10 @@
      const youWin = document.getElementById('congrats');
 
      phraseUl.innerHTML = '';
-     youWin.innerHTML = '';
+     if (youWin !== null){
+       youWin.innerHTML = '';
+     }
+
 
      for(i = 0; i < keyboard.length; i += 1) {
        if (keyboard[i].disabled === true){

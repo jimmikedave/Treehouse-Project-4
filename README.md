@@ -1,3 +1,6 @@
+# treehouse project 4
+OOP (Object-Oriented Programming)
+
 This project is a browser-based, word guessing game called 'Phrase Hunter'.
 JavaScript and OOP (Object-Oriented Programming) are used to select a random
 phrase and let the player guess the phrase, by selecting letters using an on
@@ -13,7 +16,7 @@ This class will also check if a selected letter matches a phrase letter, and wil
 show the letter if a letter is matched.
 
 Style Changes
-- changed the game's background color to skyblue
+- changed the game's background color to SkyBlue
 - added a coral groove border to the game
 - lives grow 1.1 larger when hovered over
 - keys have coral box shadow when hovered over

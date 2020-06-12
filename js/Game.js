@@ -66,15 +66,15 @@
 
      this.missed += 1;
      if (this.missed === 1) {
-       scoreboard[0].src = 'images/lostheart.png';
+       scoreboard[0].src = 'images/lostHeart.png';
      } else if (this.missed === 2) {
-       scoreboard[1].src = 'images/lostheart.png';
+       scoreboard[1].src = 'images/lostHeart.png';
      } else if (this.missed === 3) {
-       scoreboard[2].src = 'images/lostheart.png';
+       scoreboard[2].src = 'images/lostHeart.png';
      } else if (this.missed === 4) {
-       scoreboard[3].src = 'images/lostheart.png';
+       scoreboard[3].src = 'images/lostHeart.png';
      } else if (this.missed === 5) {
-       scoreboard[4].src = 'images/lostheart.png';
+       scoreboard[4].src = 'images/lostHeart.png';
        this.gameOver(false);
      }
    };

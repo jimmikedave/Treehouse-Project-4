@@ -93,9 +93,11 @@
        gameOverMsg.textContent = 'You win!'
        youWin.textContent = 'You win!';
        header.appendChild(youWin);
+       
 
       const winScreen = () =>{
         startScreen.style.display = '';
+        youWin.textContent = '';
         this.reset();
       }
       setTimeout(winScreen, 2000);
